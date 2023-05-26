@@ -52,5 +52,16 @@
 		"code": "b2",
 		"stock": 12,
 		"id": 6
+	},
+	{
+		"title": "prueba",
+		"description": "de automatic id",
+		"price": 60000,
+		"thumbnails": "ac",
+		"code": "a3",
+		"stock": 500,
+		"status": true,
+		"category": "nose",
+		"id": "0386b448-bd4f-487b-a4ee-6cb0f575cb57"
 	}
 ]

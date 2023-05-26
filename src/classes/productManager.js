@@ -1,4 +1,5 @@
 import fs from "fs"
+import { v4 as uuidV4 } from "uuid"
 
 export default class ProductManager{
     constructor(){
@@ -27,8 +28,6 @@ export default class ProductManager{
 
         const products = await this.getProducts();
         
-        const automaticId = products.length + 1
-        
         const product = {
             title,
             description,
@@ -38,7 +37,7 @@ export default class ProductManager{
             stock,
             status,
             category,
-            id: automaticId
+            id: uuidV4()
         }
 
         products.push(product)
