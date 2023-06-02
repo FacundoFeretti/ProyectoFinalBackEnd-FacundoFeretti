@@ -1,9 +1,9 @@
 import { Router } from "express";
-import ProductManager from "../classes/productManager.js";
+import { productManager } from "../server.js";
+import socketServer from "../server.js";
 
 const router = Router();
 
-const productManager = new ProductManager();
 
 router.get('/', async (req, res) => {
     const {limit} = req.query;
@@ -25,7 +25,7 @@ router.get("/:id", async(req, res) => {
 router.post("/", async (req, res) => {
     const user = req.body;
     try{
-        await productManager.addProduct(
+        const newProduct = await productManager.addProduct(
             user.title,
             user.description,
             user.price,
@@ -35,16 +35,17 @@ router.post("/", async (req, res) => {
             user.thumbnails,
             user.status
         );
-
-        res.status(200).send({status: "success"})
+        socketServer.emit('newProduct', newProduct);
+        res.status(200).send({status: "success"});
     } catch(er) {
-        res.status(500).send({ error: er.message})
+        res.status(500).send({ error: er.message});
     }
 });
 
 router.put("/:id", async (req, res) => {
         try{
-            await productManager.updateProduct(req.params.id, req.body)
+            const product = await productManager.updateProduct(req.params.id, req.body)
+            socketServer.emit('updateProduct', product)
             res.status(200).send({status: "success"})
         } catch(e) {
             res.status(500).send({ error: e.message})
@@ -55,6 +56,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id" , async (req, res) => {
     try{
         await productManager.deleteProduct(req.params.id)
+        socketServer.emit('deleteProduct', req.params.id)
         res.status(200).send({status: "success"})
     } catch(e) {
         res.status(500).send({ error: e.message})

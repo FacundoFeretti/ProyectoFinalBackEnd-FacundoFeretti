@@ -3,7 +3,7 @@
 		"title": "celular",
 		"description": "apple",
 		"price": 60000,
-		"thumbnail": "ac",
+		"thumbnails": "ac",
 		"code": "a3",
 		"stock": 50,
 		"id": 1
@@ -11,17 +11,17 @@
 	{
 		"title": "celular",
 		"description": "samsung",
-		"price": 50000,
-		"thumbnail": "aa",
+		"price": 45000,
+		"thumbnails": "ae",
 		"code": "a1",
-		"stock": 200,
-		"id": 2
+		"stock": 75,
+		"id": "2"
 	},
 	{
 		"title": "celular",
 		"description": "motorola",
 		"price": 55000,
-		"thumbnail": "ab",
+		"thumbnails": "ab",
 		"code": "a2",
 		"stock": 180,
 		"id": 3
@@ -30,7 +30,7 @@
 		"title": "celular",
 		"description": "nokia",
 		"price": 40000,
-		"thumbnail": "ad",
+		"thumbnails": "ad",
 		"code": "a4",
 		"stock": 500,
 		"id": 4
@@ -39,7 +39,7 @@
 		"title": "notebook",
 		"description": "lenovo",
 		"price": 400000,
-		"thumbnail": "ae",
+		"thumbnails": "ae",
 		"code": "b1",
 		"stock": 32,
 		"id": 5
@@ -48,13 +48,24 @@
 		"title": "notebook",
 		"description": "vaio",
 		"price": 350000,
-		"thumbnail": "af",
+		"thumbnails": "af",
 		"code": "b2",
 		"stock": 12,
 		"id": 6
 	},
 	{
 		"title": "prueba",
+		"description": "de automatic id",
+		"price": 60000,
+		"thumbnails": "ac",
+		"code": "a3",
+		"stock": 500,
+		"status": true,
+		"category": "nose",
+		"id": "0386b448-bd4f-487b-a4ee-6cb0f575cb57"
+	},
+	{
+		"title": "segunda prueba",
 		"description": "de automatic id",
 		"price": 60000,
 		"thumbnails": "ac",

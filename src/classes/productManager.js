@@ -42,6 +42,8 @@ export default class ProductManager{
 
         products.push(product)
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'))
+    
+        return product;
     }
     
 
@@ -79,11 +81,10 @@ export default class ProductManager{
 
             products[productIndex] = updatedProduct;
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'))
-            console.log("Se actualizo el producto")
+            return updatedProduct;
         } else {
             console.log(`El producto con el id: ${givenId} no fue encontrado`)
         };
-        
     }
 
     deleteProduct = async (givenId) => {
