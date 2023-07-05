@@ -6,15 +6,17 @@ const router = Router();
 
 
 router.get('/', async (req, res) => {
-    const {limit} = req.query;
-    if(limit){
-        const products = await productManager.getProducts();
-        const filtrado = await products.slice(0, limit);
-        res.send(filtrado) 
-    } else {
-        const productos = await productManager.getProducts();
-        res.send(productos)
-    }
+   let limitCondition = req.query.limit;
+   
+   let limit = limitCondition ? Number(limitCondition) : 10
+   let page = Number(req.query.page);
+   let sort = Number(req.query.sort);
+   let filter = req.query.filter;
+   let filterValue = req.query.filtervalue;
+
+   let products = await productManager.getProducts(limit, page, sort, filter, filterValue)
+
+    res.send({products})
 })
 
 router.get("/:id", async(req, res) => {
@@ -26,14 +28,7 @@ router.post("/", async (req, res) => {
     const user = req.body;
     try{
         const newProduct = await productManager.addProduct(
-            user.title,
-            user.description,
-            user.price,
-            user.code,
-            user.stock,
-            user.category,
-            user.thumbnails,
-            user.status
+    user
         );
         socketServer.emit('newProduct', newProduct);
         res.status(200).send({status: "success"});

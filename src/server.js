@@ -1,24 +1,30 @@
 import express from "express";
-import __dirname from './utils.js';
 import handlebars from 'express-handlebars';
-import { Server } from "socket.io";
+
+import __dirname from './utils.js';
 
 import viewsRouter from './routes/views.router.js'
 import routerProducts from "./routes/products.router.js";
 import routerCarts from "./routes/carts.router.js";
-import ProductManager from "./classes/productManager.js";
 
+import { Server } from "socket.io";
+import ProductManager from "./daos/mongodb/productManager.js";
+
+//Initial configuration
 const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 
+///Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
+//Static
 app.use(express.static(__dirname+'/public'));
 
+//Routers
 app.use('/', viewsRouter);
 app.use("/api/products", routerProducts)
 app.use("/api/carts", routerCarts)

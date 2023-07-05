@@ -10,7 +10,7 @@ export default class CartManager {
         carts.push({id: uuidV4(), products: [] })
         await fs.promises.writeFile(path, JSON.stringify(carts, null, "\t"))
     };
-
+ 
     getCarts = async () => {
         if(fs.existsSync(path)){
             const data = await fs.promises.readFile(path, "utf-8")

@@ -1,0 +1,44 @@
+[
+	{
+		"title": "celular",
+		"description": "apple",
+		"price": 60000,
+		"code": "a3",
+		"category": "celular"
+	},
+	{
+		"title": "celular",
+		"description": "samsung",
+		"price": 45000,
+		"code": "a1",
+		"category": "celular"
+	},
+	{
+		"title": "celular",
+		"description": "motorola",
+		"price": 55000,
+		"code": "a2",
+		"category": "celular"
+	},
+	{
+		"title": "celular",
+		"description": "nokia",
+		"price": 40000,
+		"code": "a4",
+		"category": "celular"
+	},
+	{
+		"title": "notebook",
+		"description": "lenovo",
+		"price": 400000,
+		"code": "b1",
+		"category": "notebook"
+	},
+	{
+		"title": "notebook",
+		"description": "vaio",
+		"price": 350000,
+		"code": "b2",
+		"category": "notebook"
+	}
+]

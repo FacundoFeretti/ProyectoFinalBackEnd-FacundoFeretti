@@ -15,7 +15,6 @@ const createLi = (product) => {
     newLi.innerHTML = `<h4>${product.title}</h4>
                         <p>${product.description}</p>
                         <p>${product.price}</p>
-                        <p>${product.code}</p>
                         <p>${product.code}</p>`;            
     ulList.appendChild(newLi)
 };
