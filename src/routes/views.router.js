@@ -5,7 +5,11 @@ import { productsModel } from "../daos/mongodb/models/products.model.js";
 const router = Router();
 
 router.get('/', async (req, res) => {
+    res.render('login');
+});
 
+router.get('/register', (req, res) => {
+    res.render('register');
 });
 
 router.get('/realtimeproducts', async (req, res) => {
@@ -15,6 +19,7 @@ router.get('/realtimeproducts', async (req, res) => {
 router.get('/products', async (req, res) => {
     let page = parseInt(req.query.page);
     let sort = req.query.sort;
+    let user = req.session.user
     if(!page) page = 1;
 
     let result = await productsModel.paginate({},{page,limit:4,lean: true});
@@ -22,7 +27,9 @@ router.get('/products', async (req, res) => {
     result.nextLink = result.hasNextPage ? `http://localhost:8080/products?page=${result.nextPage}` : '';
     result.isValid = !(page<=0||page>result.totalPages);
 
-    res.render('products', result)
+    const obj = {user: user, result: result}
+
+    res.render('products', obj)
 });
 
 const cartManager = new CartManager();
