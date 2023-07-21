@@ -26,7 +26,7 @@ router.post('/login', async (req,res) => {
     const user = await userModel.findOne({ email: email, password: password})
 
     if(!user){
-        return res.send({status: 'error', message: 'credenciales incorrectas'});
+        return res.status(400).send({status: 'error', message: 'credenciales incorrectas'});
     };
     
     req.session.user = {
