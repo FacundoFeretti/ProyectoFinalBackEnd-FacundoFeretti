@@ -29,6 +29,7 @@ router.get('/products', async (req, res) => {
 
     const obj = {user: user, result: result}
 
+    // res.send({obj})
     res.render('products', obj)
 });
 

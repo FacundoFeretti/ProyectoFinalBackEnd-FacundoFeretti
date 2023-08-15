@@ -2,6 +2,9 @@ import express from "express";
 import handlebars from 'express-handlebars';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import passport from "passport";
+import initializePassport from './config/passport.config.js';
+import initializePassportGitHub from "./config/github.passport.js";
 
 import __dirname from './utils.js';
 
@@ -21,12 +24,17 @@ app.use(express.urlencoded({ extended:true }));
 app.use(session({
     store: new MongoStore({
         mongoUrl: 'mongodb+srv://facundoferetti:35612799851230Pa@cluster0.knbbxtu.mongodb.net/?retryWrites=true&w=majority',
-        ttl: 1800
+        ttl: 60
     }),
     secret: 'mongoSecret',
     resave: true,
     saveUninitialized: true
 }));
+
+initializePassport();
+initializePassportGitHub();
+app.use(passport.initialize());
+app.use(passport.session());
 
 ///Handlebars
 app.engine('handlebars', handlebars.engine());
@@ -42,7 +50,7 @@ app.use("/api/products", routerProducts)
 app.use("/api/carts", routerCarts)
 app.use('/api/sessions', sessionsRouter)
 
-const httpServer = app.listen(8080, () => console.log("Servidor Levantado"));
+const httpServer = app.listen(8080, () => console.log("SERVIDOR LEVANTADO"));
 const socketServer = new Server(httpServer)
 
 export const productManager = new ProductManager();

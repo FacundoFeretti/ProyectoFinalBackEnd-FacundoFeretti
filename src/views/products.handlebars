@@ -1,5 +1,5 @@
 {{#if result.isValid}}
-    <h1>Bienvenido! {{user.name}}</h1>
+    <h1>Bienvenido! {{user.first_name}} {{user.last_name}}</h1>
     <a href="/api/sessions/logout"><button>Cerrar Sesion</button></a>
     <div>
         {{#each result.docs}}
