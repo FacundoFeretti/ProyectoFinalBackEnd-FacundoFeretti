@@ -5,7 +5,7 @@ import { createHash, isValidPassword } from '../utils.js';
 import { create } from 'express-handlebars';
 
 const LocalStrategy = local.Strategy;
-const initializePassport = () =>{
+export const initializePassportLocal = () =>{
     passport.use('register', new LocalStrategy(
         {passReqToCallback:true, usernameField: 'email'}, async (req,username,password,done) => {
             const {first_name,last_name,email,age} = req.body;
@@ -25,7 +25,7 @@ const initializePassport = () =>{
                 let result = await userModel.create(newUser);
                 return done(null,result);
             }catch (error) {
-                return done('Error al obtener el usuario: ' + error);
+                return done('Error al registrar el usuario: ' + error);
             }
         }));
 
@@ -46,11 +46,15 @@ const initializePassport = () =>{
                     return done (null, false);
                 }
                 if(!isValidPassword(password, user)) return done(null,false);
-                return done(null, user);
+                
+                const userWithRole = {
+                    ...user.toObject(),
+                    role: user.role 
+                };
+
+                return done(null, userWithRole);
             }catch(error){
                 return done(error)
             }
         }));
 };
-
-export default initializePassport;

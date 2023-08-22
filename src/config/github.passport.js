@@ -2,7 +2,7 @@ import passport from "passport";
 import GitHubStrategy from 'passport-github2'
 import userModel from "../daos/mongodb/models/user.model.js";
 
-const initializePassportGitHub = () => {
+export const initializePassportGitHub = () => {
     passport.use('github', new GitHubStrategy({
         clientID:"Iv1.5d64bccd090139fa",
         clientSecret:"336dde6369d6e138bdc9c4125be8147fe2323a61",

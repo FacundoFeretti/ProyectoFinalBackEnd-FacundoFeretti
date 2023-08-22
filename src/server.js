@@ -3,8 +3,11 @@ import handlebars from 'express-handlebars';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from "passport";
-import initializePassport from './config/passport.config.js';
 import initializePassportGitHub from "./config/github.passport.js";
+import cookieParser from "cookie-parser";
+import { initializePassportLocal } from "./config/passport.config.js";
+import { initializePassportJWT } from "./config/jwt.passport.js";
+
 
 import __dirname from './utils.js';
 
@@ -31,10 +34,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
-initializePassport();
+initializePassportLocal();
 initializePassportGitHub();
+initializePassportJWT();
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieParser())
 
 ///Handlebars
 app.engine('handlebars', handlebars.engine());
